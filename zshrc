@@ -83,40 +83,8 @@ source $ZSH/oh-my-zsh.sh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
 #
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-alias act='source env/bin/activate'
-alias oldvim=vim
-alias oldgvim=gvim
-alias gvim=gnvim
-alias vim=nvim
-alias v=nvim
-alias g=gnvim
-#alias python=/usr/local/bin/python3
-alias god='cd ~/bitbuckets/seventeen38/dfs4/'
-alias gog='cd ~/githubz/gudb/src'
-alias src='source ~/.zshrc'
-alias vz='v ~/.zshrc'
-alias u='cd ..'
-alias uu='cd ../..'
-function mcd () {
-    mkdir -p $1
-    cd $1
-}
-export GUROBI_HOME=/Library/gurobi651/mac64
+source ~/.aliases
+source ~/.local_aliases
+source ~/.exports
+source ~/.funcs
 
-# Set CLICOLOR if you want Ansi Colors in iTerm2 
-export CLICOLOR=1
-export GIT_EDITOR=vim
-# Set colors to match iTerm2 Terminal Colors
-export TERM=xterm-256color
-
-export LANG="en_US.UTF-8"
-export LC_COLLATE="en_US.UTF-8"
-export LC_CTYPE="en_US.UTF-8"
-export LC_MESSAGES="en_US.UTF-8"
-export LC_MONETARY="en_US.UTF-8"
-export LC_NUMERIC="en_US.UTF-8"
-export LC_TIME="en_US.UTF-8"
-export LC_ALL="en_US.UTF-8"
