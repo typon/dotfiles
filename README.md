@@ -1,2 +1,5 @@
-# dotfiles
-muh dotfiles
+# Hassan's Dotfiles
+Software covered:
+    - Neovim
+    - zsh
+
