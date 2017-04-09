@@ -1,5 +1,7 @@
 # Hassan's Dotfiles
+
 Software covered:
-    - Neovim
-    - zsh
+
+    * Neovim
+    * zsh
 
