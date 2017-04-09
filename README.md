@@ -2,6 +2,6 @@
 
 Software covered:
 
-    * Neovim
-    * zsh
+* Neovim
+* zsh
 
