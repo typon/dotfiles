@@ -4,4 +4,4 @@ Software covered:
 
 * Neovim
 * zsh
-
+* tmux
