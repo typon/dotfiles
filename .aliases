@@ -1,7 +1,4 @@
-alias vim=nvim
-alias n=nvim
 alias src='source ~/.zshrc'
 alias vz='v ~/.zshrc'
 alias u='cd ..'
 alias uu='cd ../..'
-
