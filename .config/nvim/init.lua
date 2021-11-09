@@ -46,4 +46,3 @@ require('plugins/nvim-treesitter')  -- tree-sitter interface
 -- nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 vim.api.nvim_set_keymap('n', '<Leader>ff', '<cmd>lua require(\'telescope.builtin\').find_files()<cr>', {noremap = true})
-
