@@ -17,6 +17,12 @@ local sources = {
 
   -- Python
   b.formatting.black,
+  b.diagnostics.mypy.with({
+    timeout=20000
+  }),
+  b.diagnostics.flake8.with({
+    timeout=20000
+  }),
 
   -- Shell
   b.formatting.shfmt,

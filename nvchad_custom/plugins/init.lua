@@ -34,7 +34,10 @@ return {
     end,
   },
 
-  ["tpope/vim-fugitive"] = {
+  ["typon/vgit.nvim"] = {
+    config = function()
+      require("vgit").setup()
+    end,
   },
 
   -- code formatting, linting etc
