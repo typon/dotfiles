@@ -34,12 +34,6 @@ return {
     end,
   },
 
-  ["typon/vgit.nvim"] = {
-    config = function()
-      require("vgit").setup()
-    end,
-  },
-
   -- code formatting, linting etc
   ["jose-elias-alvarez/null-ls.nvim"] = {
     after = "nvim-lspconfig",
@@ -80,6 +74,9 @@ return {
     }
   },
 
+  ["tpope/vim-fugitive"] = {},
+
+
   -- remove plugin
-  -- ["hrsh7th/cmp-path"] = false,
+  ["lewis6991/gitsigns.nvim"] = false,
 }
