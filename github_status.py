@@ -46,6 +46,8 @@ def get_pr_to_runs_map(repo_name: str, username: str, github_token: str, commit_
         latest_commit = sorted(commits, key=lambda c: c.timestamp)[0]
         pr_to_runs[pr] = commit_to_runs_map[latest_commit]
 
+    pr_to_runs = dict(sorted(pr_to_runs.items(), key=lambda k_v: int(k_v[0])))
+
     return pr_to_runs
 
 
