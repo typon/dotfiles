@@ -75,7 +75,8 @@ return {
   },
 
   ["tpope/vim-fugitive"] = {},
-
+  ["MunifTanjim/nui.nvim"] = {},
+  ["dpayne/CodeGPT.nvim"] = {},
 
   -- remove plugin
   ["lewis6991/gitsigns.nvim"] = false,
