@@ -16,7 +16,6 @@ local packer = require 'packer'
 return packer.startup(function(use)
   use 'wbthomason/packer.nvim' -- packer can manage itself
 
-  use 'kyazdani42/nvim-tree.lua'
   use 'Yggdroot/indentLine'
   use 'windwp/nvim-autopairs'
   use 'kyazdani42/nvim-web-devicons'

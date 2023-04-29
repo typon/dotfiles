@@ -6,6 +6,6 @@ local autocmd = vim.api.nvim_create_autocmd
 --   command = "tabdo wincmd =",
 -- })
 --
-local opt = vim.opt
+local opt = vim.o
 
 opt.noswapfile = false

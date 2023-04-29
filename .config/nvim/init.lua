@@ -28,7 +28,6 @@ Website: https://github.com/brainfucksec/neovim-lua
 require('settings')                 -- settings
 require('keymaps')                  -- keymaps
 require('plugins/packer')           -- plugin manager
-require('plugins/nvim-tree')	      -- file manager
 require('plugins/feline')           -- statusline
 require('plugins/nvim-cmp')         -- autocomplete
 require('plugins/nvim-autopairs')   -- autopairs
