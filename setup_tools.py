@@ -110,16 +110,10 @@ def install_neovim(ctx):
     ctx = incr_step(ctx)
     return ctx
 
-def install_lazygit(ctx):
-    print(f"Step {ctx.step}: Install lazygit")
-    print("brew install lazygit")
-    wait_for_enter()
-    ctx = incr_step(ctx)
-    return ctx
-
-def install_ripgrep(ctx):
-    print(f"Step {ctx.step}: Install ripgrep")
-    print("brew install ripgrep")
+def install_cli_tools_from_brew(ctx):
+    tools = "lazygit lazydocker ripgrep git-delta knqyf263/pet/pet bat"
+    print(f"Step {ctx.step}: Install {tools}")
+    print(f"brew install {tools}")
     wait_for_enter()
     ctx = incr_step(ctx)
     return ctx
@@ -141,8 +135,7 @@ if __name__ == "__main__":
         install_zsh_syntax_highlighter,
         install_fzf,
         install_neovim,
-        install_lazygit,
-        install_ripgrep,
+        install_cli_tools_from_brew,
     ]
     for step in steps:
          ctx = step(ctx)
