@@ -7,9 +7,13 @@ set -x
 sudo_exists=$(command -v sudo >/dev/null 2>&1 && echo true || echo false)
 
 if [ "$sudo_exists" = true ]; then
-    sudo apt install zsh -y
+    sudo add-apt-repository ppa:neovim-ppa/unstable
+    sudo apt-get update
+    sudo apt-get install neovim zsh -y
 else
-    apt install zsh -y
+    add-apt-repository ppa:neovim-ppa/unstable
+    apt-get update
+    apt-get install neovim zsh -y
 fi
 
 # tmux
@@ -34,6 +38,8 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 rm -rf ~/.fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
+
+# neovim
 
 
 # Download dotfiles from github
