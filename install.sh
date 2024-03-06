@@ -2,25 +2,52 @@
 set -e
 set -x
 
+# Initialize arguments
+install_neovim=false
+install_tmux=false
+
+# Parse command line arguments
+for arg in "$@"
+do
+    case $arg in
+        --install-neovim)
+        install_neovim=true
+        shift # Remove argument from processing
+        ;;
+        --install-tmux)
+        install_tmux=true
+        shift # Remove argument from processing
+        ;;
+    esac
+done
+
 
 # Check if sudo exists
 sudo_exists=$(command -v sudo >/dev/null 2>&1 && echo true || echo false)
 
 if [ "$sudo_exists" = true ]; then
-    sudo add-apt-repository ppa:neovim-ppa/unstable
     sudo apt-get update
-    sudo apt-get install neovim zsh -y
+    if [ "$install_neovim" = true ]; then
+        sudo add-apt-repository ppa:neovim-ppa/unstable
+        sudo apt-get install neovim -y
+    fi
+    sudo apt-get install zsh -y
 else
-    add-apt-repository ppa:neovim-ppa/unstable
     apt-get update
-    apt-get install neovim zsh -y
+    if [ "$install_neovim" = true ]; then
+        add-apt-repository ppa:neovim-ppa/unstable
+        apt-get install neovim -y
+    fi
+    apt-get install zsh -y
 fi
 
-# tmux
-cd $HOME
-rm -rf ~/.tmux
-git clone https://github.com/gpakosz/.tmux.git ~/.tmux
-ln -s -f .tmux/.tmux.conf
+if [ "$install_tmux" = true ]; then
+    # tmux
+    cd $HOME
+    rm -rf ~/.tmux
+    git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+    ln -s -f .tmux/.tmux.conf
+fi
 
 # oh-my-zsh
 cd $HOME
