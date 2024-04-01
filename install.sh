@@ -76,10 +76,6 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
 
 
-# install brew tools
-brew install bat ripgrep lazygit btop
-
-
 # Download dotfiles from github
 cd ~/.dotfiles
 cp .zshrc ~/
@@ -87,3 +83,10 @@ cp .exports ~/
 cp .funcs ~/
 cp .aliases ~/
 cp .tmux.conf.local ~/
+
+source ~/.exports
+
+# install brew tools
+if [ "$install_homebrew" = true ]; then
+    brew install bat ripgrep lazygit btop
+fi
