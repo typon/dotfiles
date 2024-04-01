@@ -5,6 +5,7 @@ set -x
 # Initialize arguments
 install_neovim=false
 install_tmux=false
+install_homebrew=false
 
 # Parse command line arguments
 for arg in "$@"
@@ -16,6 +17,10 @@ do
         ;;
         --install-tmux)
         install_tmux=true
+        shift # Remove argument from processing
+        ;;
+        --install-homebrew)
+        install_homebrew=true
         shift # Remove argument from processing
         ;;
     esac
@@ -49,6 +54,10 @@ if [ "$install_tmux" = true ]; then
     ln -s -f .tmux/.tmux.conf
 fi
 
+if [ "$install_homebrew" = true ]; then
+     NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
 # oh-my-zsh
 cd $HOME
 rm -rf ~/.oh-my-zsh
@@ -66,7 +75,9 @@ rm -rf ~/.fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 ~/.fzf/install --all
 
-# neovim
+
+# install brew tools
+brew install bat ripgrep lazygit btop
 
 
 # Download dotfiles from github
