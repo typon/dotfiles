@@ -52,7 +52,7 @@ source ~/.exports
 
 # install brew tools
 if [ "$install_homebrew" = true ]; then
-    brew install bat ripgrep lazygit btop fzf neovim
+    brew install bat ripgrep lazygit btop fzf neovim lazydocker git-delta knqyf263/pet/pet
 fi
 
 # Install kickstart nvim
