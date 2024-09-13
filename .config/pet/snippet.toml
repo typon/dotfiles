@@ -1,0 +1,83 @@
+[[snippets]]
+  description = "Tail the latest modified file that ends with .log"
+  command = "tail -f `ls -t *.log | head -n1`"
+  tag = ["", "bash"]
+  output = ""
+
+[[snippets]]
+  description = "Show all changed files between this branch and master"
+  command = "git diff --name-only origin/master"
+  tag = ["", "git"]
+  output = ""
+
+[[snippets]]
+  description = "Store git credentials locally"
+  command = "git config --global credential.helper store"
+  tag = ["", "git"]
+  output = ""
+
+[[snippets]]
+  description = "Clone covariant-apps repo"
+  command = "git clone https://github.com/embodiedintelligence/covariant-apps.git"
+  tag = ["covariant", "git"]
+  output = ""
+
+[[snippets]]
+  description = "Reset hard local branch to match remote"
+  command = "git reset --hard @{u}"
+  tag = ["git"]
+  output = ""
+
+[[snippets]]
+  description = "Check if port is currently used."
+  command = "sudo lsof -i -P -n | grep <port>"
+  tag = ["networking"]
+  output = ""
+
+[[snippets]]
+  description = "Clone lab42_vr"
+  command = "git clone https://github.com/embodiedintelligence/lab42_vr.git"
+  tag = ["covariant", "git"]
+  output = ""
+
+[[snippets]]
+  description = "Run Kitting App"
+  command = "python cov_apps/application/kitting/main.py \\\nproduction \\\n--app-config-path=cov_apps/application/kitting/station_configs/sz_deca/sz_deca_app_config.json \\\n--hardware-backend=\"<backend=HARDWARE_ONLY>\" \\\n--launch-brain \\\n--robots-to-launch=\"{<robots_to_launch=0: LEFT_ONLY>}\" \\\n--ingredients=\"{<ingredients=0: {LEFT: garlic}>}\" \\\n--webgui-port=\"<webgui_port=5015>\" \\\n--launch-conveyors \\\n--robot-ips=\"{0: 18.144.174.32}\" \\\n--num-items-per-buffer=\"<num_items=5>\" \\\n--debug-mode=ALL \\\n--skip-station-health \\\n--station-type=<station_type=SZ_DECA>"
+  tag = ["covariant", "kitting"]
+  output = ""
+
+[[snippets]]
+  description = "Run lint for Kitting directory"
+  command = "\\n\nblack cov_apps/application/kitting;\nisort cov_apps/application/kitting;\nflake8 cov_apps/application/kitting;\nmypy --config-file mypy.ini cov_apps/application/kitting;\n"
+  tag = ["covariant", "lint"]
+  output = ""
+
+[[snippets]]
+  description = "Show all unresolved conversations from PR"
+  command = "gh api graphql -f owner=\"embodiedintelligence\" -f repo=\"covariant-apps\" -F pr=\"<pr_number>\" -f query='\n  query FetchReviewComments($owner: String!, $repo: String!, $pr: Int!) {\n    repository(owner: $owner, name: $repo) {\n      pullRequest(number: $pr) {\n        url\n        reviewDecision\n        reviewThreads(first: 100) {\n          edges {\n            node {\n              isResolved\n              isOutdated\n              isCollapsed\n              comments(first: 100) {\n                totalCount\n                nodes {\n                  author {\n                    login\n                  }\n                  body\n                  url\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n' | jq '.data.repository.pullRequest.reviewThreads.edges | map(select(.node.isResolved == false))'\n"
+  tag = ["covariant", "git"]
+  output = ""
+
+[[snippets]]
+  description = "Launch notebook in lab42vr"
+  command = "bazel run covariant/dev_tools/jupyter -- notebook --ip=0.0.0.0 --NotebookApp.token='' --NotebookApp.password='' --NotebookApp.notebook_dir='/root/lab42_vr' --allow-root"
+  tag = ["covariant"]
+  output = ""
+
+[[snippets]]
+  description = "Launch pytest in GDB"
+  command = "gdb --args $(which python) -m pytest -sv <path>"
+  tag = ["covariant", "debug"]
+  output = ""
+
+[[snippets]]
+  description = "Kill Kitting App instances"
+  command = "ps aux | grep python | grep -e production | awk '{print $2}' | xargs --no-run-if-empty sudo kill -9"
+  tag = ["covariant", "kitting"]
+  output = ""
+
+[[snippets]]
+  description = "Change shell to zsh"
+  command = "chsh -s $(which zsh)"
+  tag = ["shell", "zsh"]
+  output = ""
