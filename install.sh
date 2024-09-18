@@ -41,7 +41,6 @@ cp .aliases ~/
 cp .tmux.conf.local ~/
 
 source ~/.exports
-
 # install brew tools
 if [ "$install_homebrew" = true ]; then
     brew install bat ripgrep lazygit btop fzf neovim lazydocker git-delta knqyf263/pet/pet
@@ -49,3 +48,9 @@ fi
 
 # Install kickstart nvim
 git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+
+# Install tmux config
+cd $HOME
+rm -rf ~/.tmux
+git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+ln -s -f .tmux/.tmux.conf
