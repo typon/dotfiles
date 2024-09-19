@@ -55,7 +55,7 @@ cp .tmux.conf.local ~/
 source ~/.exports
 # install brew tools
 if [ "$install_homebrew" = true ]; then
-    brew install eza bat ripgrep lazygit btop fzf neovim lazydocker git-delta knqyf263/pet/pet
+    brew install eza bat ripgrep lazygit btop fzf neovim lazydocker git-delta knqyf263/pet/pet pueue glances
 fi
 
 # Install kickstart nvim
