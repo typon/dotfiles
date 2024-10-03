@@ -68,8 +68,9 @@ def main():
         print(f"Error: {exports_file} does not exist. Please create it before running this script.")
         sys.exit(1)
     
-    # Source the .exports file
-    run_command(f'source {exports_file}')
+    # Add brew to PATH
+    # brew's location is "/home/linuxbrew/.linuxbrew/bin/brew"
+    os.environ['PATH'] = f"{os.environ['PATH']}:/home/linuxbrew/.linuxbrew/bin"
 
     # Install brew tools
     if args.install_homebrew and check_command_exists("brew"):
@@ -77,7 +78,7 @@ def main():
         run_command(f'brew install {" ".join(brew_tools)}')
 
     # Install kickstart nvim
-    nvim_config_dir = os.path.expanduser("${XDG_CONFIG_HOME:-$HOME/.config}/nvim")
+    nvim_config_dir = os.path.expanduser("~/.config/nvim")
     if not os.path.isdir(nvim_config_dir):
         run_command(f'git clone https://github.com/nvim-lua/kickstart.nvim.git "{nvim_config_dir}"')
 
