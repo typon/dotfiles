@@ -38,8 +38,17 @@ if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
 fi
 
 # zsh-syntax-highlighting
-if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+zsh_syntax_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting"
+echo "Checking directory: $zsh_syntax_dir"
+
+if [ ! -d "$zsh_syntax_dir" ]; then
+    echo "Directory does not exist. Creating and cloning repository."
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$zsh_syntax_dir"
+elif [ -z "$(ls -A "$zsh_syntax_dir")" ]; then
+    echo "Directory exists but is empty. Cloning repository."
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$zsh_syntax_dir"
+else
+    echo "zsh-syntax-highlighting directory already exists and is not empty. Skipping clone."
 fi
 
 # Install tmux config
