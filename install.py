@@ -5,6 +5,7 @@ import subprocess
 import argparse
 
 def run_command(command):
+    print(f"\033[34mExecuting command: {command}\033[0m")  # Print command in blue
     try:
         subprocess.run(command, check=True, shell=True)
     except subprocess.CalledProcessError as e:
@@ -34,12 +35,12 @@ def main():
         run_command('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended')
 
     # Powerlevel10k
-    powerlevel10k_dir = os.path.expanduser("~/.oh-my-zsh/custom}/themes/powerlevel10k")
+    powerlevel10k_dir = os.path.expanduser("~/.oh-my-zsh/custom/themes/powerlevel10k")
     if not os.path.isdir(powerlevel10k_dir):
         run_command(f'git clone --depth=1 https://github.com/romkatv/powerlevel10k.git {powerlevel10k_dir}')
 
     # zsh-syntax-highlighting
-    zsh_syntax_dir = os.path.expanduser("~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting")
+    zsh_syntax_dir = os.path.expanduser("~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting")
     print(f"Checking directory: {zsh_syntax_dir}")
     if not os.path.isdir(zsh_syntax_dir):
         print("Directory does not exist. Creating and cloning repository.")
