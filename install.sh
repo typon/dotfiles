@@ -23,40 +23,46 @@ do
     esac
 done
 
-if [ "$install_homebrew" = true ]; then
+if [ "$install_homebrew" = true ] && ! command -v brew &> /dev/null; then
      NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 # oh-my-zsh
-cd $HOME
-rm -rf ~/.oh-my-zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
 
 # Powerlevel10k
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+if [ ! -d "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k" ]; then
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+fi
 
 # zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+if [ ! -d "${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting" ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+fi
 
 # Install tmux config
-cd $HOME
-rm -rf ~/.tmux
-git clone https://github.com/gpakosz/.tmux.git ~/.tmux
-ln -s -f .tmux/.tmux.conf
+if [ ! -d "$HOME/.tmux" ]; then
+    git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+    ln -s -f .tmux/.tmux.conf ~/.tmux.conf
+fi
 
 # Download dotfiles from github
 cd ~/.dotfiles
-cp .zshrc ~/
-cp .exports ~/
-cp .funcs ~/
-cp .aliases ~/
-cp .tmux.conf.local ~/
+cp -n .zshrc ~/
+cp -n .exports ~/
+cp -n .funcs ~/
+cp -n .aliases ~/
+cp -n .tmux.conf.local ~/
 
 source ~/.exports
 # install brew tools
-if [ "$install_homebrew" = true ]; then
+if [ "$install_homebrew" = true ] && command -v brew &> /dev/null; then
     brew install eza bat ripgrep lazygit btop fzf neovim lazydocker git-delta knqyf263/pet/pet pueue glances
 fi
 
 # Install kickstart nvim
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+if [ ! -d "${XDG_CONFIG_HOME:-$HOME/.config}/nvim" ]; then
+    git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+fi
