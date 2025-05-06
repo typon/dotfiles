@@ -80,7 +80,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 plugins=(
     git
     vi-mode
-    zsh-syntax-highlighting
+    fast-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh

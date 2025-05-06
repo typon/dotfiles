@@ -19,6 +19,7 @@ def check_command_exists(command):
 def main():
     parser = argparse.ArgumentParser(description="Install script")
     parser.add_argument("--install-homebrew", action="store_true", help="Install Homebrew")
+    parser.add_argument("--force-copy-dotfiles", action="store_true", help="Force copy dotfiles", default=True)
     args = parser.parse_args()
 
     # Check if zsh is installed
@@ -39,17 +40,16 @@ def main():
     if not os.path.isdir(powerlevel10k_dir):
         run_command(f'git clone --depth=1 https://github.com/romkatv/powerlevel10k.git {powerlevel10k_dir}')
 
-    # zsh-syntax-highlighting
-    zsh_syntax_dir = os.path.expanduser("~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting")
+    zsh_syntax_dir = os.path.expanduser("~/.oh-my-zsh/custom/plugins/fast-syntax-highlighting")
     print(f"Checking directory: {zsh_syntax_dir}")
     if not os.path.isdir(zsh_syntax_dir):
         print("Directory does not exist. Creating and cloning repository.")
-        run_command(f'git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "{zsh_syntax_dir}"')
+        run_command(f'git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git "{zsh_syntax_dir}"')
     elif not os.listdir(zsh_syntax_dir):
         print("Directory exists but is empty. Cloning repository.")
-        run_command(f'git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "{zsh_syntax_dir}"')
+        run_command(f'git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git "{zsh_syntax_dir}"')
     else:
-        print("zsh-syntax-highlighting directory already exists and is not empty. Skipping clone.")
+        print("fast-syntax-highlighting directory already exists and is not empty. Skipping clone.")
 
     # Install tmux config
     tmux_dir = os.path.expanduser("~/.tmux")
@@ -61,7 +61,11 @@ def main():
     os.chdir(os.path.expanduser("~/.dotfiles"))
     dotfiles = [".zshrc", ".exports", ".funcs", ".aliases", ".tmux.conf.local"]
     for file in dotfiles:
-        run_command(f'cp -n {file} ~/')
+        if args.force_copy_dotfiles:
+            copy_if_not_exists = "cp"
+        else:
+            copy_if_not_exists = "cp -n"
+        run_command(f'{copy_if_not_exists} {file} ~/')
 
     exports_file = os.path.expanduser("~/.exports")
     if not os.path.exists(exports_file):
