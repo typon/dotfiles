@@ -90,7 +90,6 @@ def main():
     hishtory_dir = os.path.expanduser("~/.hishtory")
     if not os.path.isdir(hishtory_dir):
         run_command('curl https://hishtory.dev/install.py | python3 -')
-        run_command('hishtory init 02df1b0b-f260-4ff9-9383-036327075b15')
 
 if __name__ == "__main__":
     main()

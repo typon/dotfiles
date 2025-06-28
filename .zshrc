@@ -122,3 +122,5 @@ source ~/.aliases
 source ~/.funcs
 
 source <(fzf --zsh)
+
+source $HOME/.hishtory/config.zsh
