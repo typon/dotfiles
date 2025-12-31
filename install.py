@@ -19,6 +19,7 @@ def check_command_exists(command):
 def main():
     parser = argparse.ArgumentParser(description="Install script")
     parser.add_argument("--install-homebrew", action="store_true", help="Install Homebrew")
+    parser.add_argument("--install-hishtory", action="store_true", help="Install the hishtory tool")
     parser.add_argument("--force-copy-dotfiles", action="store_true", help="Force copy dotfiles", default=True)
     args = parser.parse_args()
 
@@ -87,9 +88,10 @@ def main():
         run_command(f'git clone https://github.com/nvim-lua/kickstart.nvim.git "{nvim_config_dir}"')
 
     # Install hishtory
-    hishtory_dir = os.path.expanduser("~/.hishtory")
-    if not os.path.isdir(hishtory_dir):
-        run_command('curl https://hishtory.dev/install.py | python3 -')
+    if args.install_hishtory:
+        hishtory_dir = os.path.expanduser("~/.hishtory")
+        if not os.path.isdir(hishtory_dir):
+            run_command('curl https://hishtory.dev/install.py | python3 -')
 
 if __name__ == "__main__":
     main()
