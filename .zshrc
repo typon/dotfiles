@@ -123,4 +123,6 @@ source ~/.funcs
 
 source <(fzf --zsh)
 
-source $HOME/.hishtory/config.zsh
+if [ -f ~/.hishtory/config.zsh ]; then
+    source $HOME/.hishtory/config.zsh
+fi
